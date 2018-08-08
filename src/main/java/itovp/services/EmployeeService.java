@@ -1,13 +1,15 @@
 package itovp.services;
 
-import itovp.entities.Employee;
-import itovp.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+import itovp.dto.EmployeeDTO;
+import itovp.entities.Employee;
+import itovp.repositories.EmployeeRepository;
+import itovp.repositories.ManagementLevelsRepository;
 
 @Service
 public class EmployeeService {
@@ -15,12 +17,40 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    ManagementLevelsRepository managementLevelsRepository;
+
     public void addEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
+    public Employee findOne(String employeeId) {
+        return employeeRepository.findOne(employeeId);
+    }
 
-    public void removeEmployee(Employee employee) {
-        employeeRepository.delete(employee);
+
+    public void addEmployee(EmployeeDTO employee) {
+        Employee empl = employeeRepository.findOne(employee.employeeId);
+        if (empl == null) {
+            empl = new Employee();
+            empl.setEmployeeId(employee.employeeId);
+            empl.setSurname(employee.surname);
+            empl.setName(employee.name);
+            empl.setBirthday(employee.birthday);
+            empl.setHiringDate(employee.hiringDate);
+        }
+        empl.setEmail(employee.email);
+        empl.setAddress(employee.address);
+        empl.setSalary(employee.salary);
+        if (employee.manager_id != null && !employee.manager_id.equals("")) {
+            empl.setManager(employeeRepository.findOne(employee.manager_id));
+        }
+        empl.setManagementLevel_id(managementLevelsRepository.findOne(employee.managementLevel_id));
+        employeeRepository.save(empl);
+    }
+
+    public void removeEmployee(String employeeId) {
+        employeeRepository.updateSubs(employeeId);
+        employeeRepository.delete(employeeId);
     }
 
     public List<Employee> getAllEmployees() {
@@ -37,7 +67,7 @@ public class EmployeeService {
     public void changeSalaryToAllWithCoef(double coefficient) {
         List<Employee> listOfEmpl = employeeRepository.findAll();
 
-        listOfEmpl.parallelStream().forEach((Employee e) -> e.setSalary(e.getSalary().multiply(new BigDecimal(coefficient))));
+        listOfEmpl.parallelStream().forEach((Employee e) -> e.setSalary((int) (e.getSalary() * coefficient)));
 
         employeeRepository.save(listOfEmpl);
     }
@@ -52,8 +82,12 @@ public class EmployeeService {
     public void changeSalaryToAllWithValue(double value) {
         List<Employee> listOfEmpl = employeeRepository.findAll();
 
-        listOfEmpl.parallelStream().forEach((Employee e) -> e.setSalary(e.getSalary().add(new BigDecimal(value))));
+        listOfEmpl.parallelStream().forEach((Employee e) -> e.setSalary((int) (e.getSalary() + value)));
 
         employeeRepository.save(listOfEmpl);
+    }
+
+    public List<Employee> getManagers(int lvl) {
+        return employeeRepository.getManagers(lvl);
     }
 }

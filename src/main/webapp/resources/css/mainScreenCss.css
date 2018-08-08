@@ -1,0 +1,84 @@
+body {
+    width:80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.employees {
+    display: flex;
+    justify-content: space-between;
+}
+
+#employeeForm {
+
+}
+
+#employeesInfo {
+    margin-left: 10px;
+}
+
+#employeeForm input[type=text],
+#employeeForm input[type=date],
+#employeeForm input[type=number],
+#employeeForm input[type=email],
+#employeeForm select,
+#employeeForm textarea {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    resize: vertical;
+}
+
+#employeeForm label {
+    padding: 4px 4px 4px 0;
+    display: inline-block;
+}
+
+#employeeForm input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 16px;
+}
+
+.col-25 {
+    float: left;
+    width: 35%;
+    margin-top: 4px;
+}
+
+.col-75 {
+    float: left;
+    width: 65%;
+    margin-top: 4px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#employeeForm label, #employeeForm input, #employeesInfo th, #employeesInfo td,  #employeeForm option {
+
+}
+

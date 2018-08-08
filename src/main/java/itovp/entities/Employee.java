@@ -1,15 +1,17 @@
 package itovp.entities;
 
 
-import com.google.gson.annotations.JsonAdapter;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tblEmployees")
@@ -25,7 +27,7 @@ public class Employee {
     @NotNull
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
@@ -43,7 +45,7 @@ public class Employee {
     private ManagementLevel managementLevel_id;
 
     @NotNull
-    private BigDecimal salary;
+    private double salary;
 
     private String address;
 
@@ -79,7 +81,7 @@ public class Employee {
         this.managementLevel_id = managementLevel_id;
     }
 
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
@@ -119,7 +121,7 @@ public class Employee {
         return managementLevel_id;
     }
 
-    public BigDecimal getSalary() {
+    public double getSalary() {
         return salary;
     }
 

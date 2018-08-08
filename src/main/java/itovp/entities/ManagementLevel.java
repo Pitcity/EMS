@@ -17,7 +17,7 @@ public class ManagementLevel {
 
     @NotNull
     @Column(unique = true)
-    String lvlName;
+    private String lvlName;
 
     public void setLvlId(int lvlId) {
         this.lvlId = lvlId;
@@ -29,5 +29,17 @@ public class ManagementLevel {
 
     public void setLvlName(String lvlName) {
         this.lvlName = lvlName;
+    }
+
+    public String getLvlName() {
+        return lvlName;
+    }
+
+    public int getLvlId() {
+        return lvlId;
+    }
+
+    public int getLvl() {
+        return lvl;
     }
 }

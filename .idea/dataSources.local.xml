@@ -2,7 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="employeeManagementSystemDB@localhost" uuid="d05bb1e9-0e78-48f1-8098-e3dbfcc6d27b">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
       <introspection-schemas>employeeManagementSystemDB:public</introspection-schemas>
     </data-source>
   </component>

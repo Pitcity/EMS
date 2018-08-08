@@ -1,8 +1,8 @@
-function Employee(employeeId, surname, name, birthday, email, managementLevel_id, salary, address, manager_id, hiringDate) {
+function Employee(employeeId, surname, name, birthday, email, managementLevel_id, manager, address, salary, hiringDate) {
     this.employeeId = employeeId;
     this.surname = surname;
     this.name = name;
-    this.manager_id = manager_id;
+    this.manager = manager;
     this.birthday = birthday;
     this.hiringDate = hiringDate;
     this.email = email;
@@ -27,8 +27,8 @@ function jsonToEmlpList(jsonData) {
             item.birthday,
             item.email,
             item.managementLevel_id,
+            item.manager,
             item.address,
-            item.manager_id,
             item.salary,
             item.hiringDate
         );
